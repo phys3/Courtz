@@ -1,18 +1,9 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { SafeAreaView } from 'react-native';
 import { StatusBar } from 'react-native';
-import { NativeBaseProvider, View, extendTheme } from 'native-base';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Icon from 'react-native-vector-icons/FontAwesome';
-import styled from 'styled-components';
+import { NativeBaseProvider, extendTheme } from 'native-base';
+import TabNavigator from './src/navigation/TabNavigator';
 
-const TabLabel = styled.text`
-  font-size: 12px;
-  align-self: center;
-`;
-
-const Xy = () => <View />;
 const theme = extendTheme({
   // Can simply pass default props to change default behaviour of components.
   components: {
@@ -27,8 +18,6 @@ const theme = extendTheme({
   },
 });
 
-const Tab = createBottomTabNavigator();
-
 function App(): JSX.Element {
   return (
     <NavigationContainer>
@@ -38,53 +27,7 @@ function App(): JSX.Element {
           barStyle={'dark-content'}
           hidden={false}
         />
-        <Tab.Navigator>
-          <Tab.Screen
-            name="Stack"
-            component={Xy}
-            listeners={({ navigation }) => ({
-              blur: () => navigation.setParams({ screen: undefined }),
-            })}
-            options={{
-              unmountOnBlur: true,
-              headerShown: false,
-              tabBarIcon: ({ focused }) => (
-                <Icon name="plus" size={20} color="black" />
-              ),
-              tabBarLabel: ({ focused }) => (
-                <TabLabel
-                  numberOfLines={1}
-                  adjustsFontSizeToFit
-                  focused={focused}>
-                  {'Blocks'}
-                </TabLabel>
-              ),
-            }}
-          />
-          <Tab.Screen
-            name="zdzdz"
-            component={Xy}
-            listeners={({ navigation }) => ({
-              blur: () => navigation.setParams({ screen: undefined }),
-            })}
-            options={{
-              unmountOnBlur: true,
-              headerShown: false,
-              tabBarIcon: ({ focused }) => (
-                <Icon name="plus" size={20} color="black" />
-              ),
-              tabBarLabel: ({ focused }) => (
-                <TabLabel
-                  numberOfLines={1}
-                  adjustsFontSizeToFit
-                  focused={focused}>
-                  {'Blocks'}
-                </TabLabel>
-              ),
-            }}
-          />
-        </Tab.Navigator>
-        <SafeAreaView />
+        <TabNavigator />
       </NativeBaseProvider>
     </NavigationContainer>
   );
