@@ -1,35 +1,29 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { StatusBar } from 'react-native';
-import { NativeBaseProvider, extendTheme } from 'native-base';
-import TabNavigator from './src/navigation/TabNavigator';
+import AuthNavigator from './src/navigation/AuthNavigator';
+import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
+import { GluestackUIProvider } from '@gluestack-ui/themed';
 
-const theme = extendTheme({
-  // Can simply pass default props to change default behaviour of components.
-  components: {
-    Select: {
-      baseStyle: {
-        _disabled: {
-          bg: 'gray.100',
-          borderColor: 'gray.400',
-        },
-      },
-    },
-  },
+const client = new ApolloClient({
+  uri: 'http://localhost:3000/',
+  cache: new InMemoryCache(),
 });
 
 function App(): JSX.Element {
   return (
-    <NavigationContainer>
-      <NativeBaseProvider theme={theme}>
-        <StatusBar
-          backgroundColor={'#fff'}
-          barStyle={'dark-content'}
-          hidden={false}
-        />
-        <TabNavigator />
-      </NativeBaseProvider>
-    </NavigationContainer>
+    <ApolloProvider client={client}>
+      <GluestackUIProvider>
+        <NavigationContainer>
+          <StatusBar
+            backgroundColor={'#fff'}
+            barStyle={'dark-content'}
+            hidden={false}
+          />
+          <AuthNavigator />
+        </NavigationContainer>
+      </GluestackUIProvider>
+    </ApolloProvider>
   );
 }
 
