@@ -28,6 +28,7 @@ const Authentication = () => {
   const [exchangeAuthorizationCode, { data }] = useMutation(
     EXCHANGE_AUTHORIZATION_CODE,
   );
+  console.log('first');
   useEffect(() => {
     const handleOpenURL = event => {
       const code = event.url.split('code=')[1].split('&')[0];
@@ -47,6 +48,7 @@ const Authentication = () => {
   }, []);
   const signIn = async () => {
     try {
+      console.log('hbbhbhhb');
       const result = await authorize(config);
       console.log(result);
       // signInWithGoogle({ variables: { token: result.accessToken } });

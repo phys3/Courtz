@@ -1,6 +1,10 @@
 #import "AppDelegate.h"
 #import <React/RCTLinkingManager.h>
 #import <React/RCTBundleURLProvider.h>
+#import "RNAppAuthAuthorizationFlowManager.h"
+
+@interface AppDelegate () <RNAppAuthAuthorizationFlowManager>
+@end
 
 @implementation AppDelegate
 
@@ -18,6 +22,9 @@
    openURL:(NSURL *)url
    options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options
 {
+  if ([self.authorizationFlowManagerDelegate resumeExternalUserAgentFlowWithURL:url]) {
+    return YES;
+  }
   return [RCTLinkingManager application:application openURL:url options:options];
 }
 
