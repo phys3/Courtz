@@ -31,7 +31,7 @@ const EventAdd = () => {
 
   const onSubmit = data => {
     console.log(data);
-    // createEvent({ variables: data });
+    createEvent({ variables: data });
   };
   return (
     <View>

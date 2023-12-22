@@ -4,7 +4,7 @@ import Authentication from '../screens/Authentication';
 import TabNavigator from './TabNavigator';
 
 const Stack = createStackNavigator();
-const isSignedIn = true;
+const isSignedIn = false;
 const AuthNavigator = () => {
   return isSignedIn ? (
     <TabNavigator />
