@@ -1,4 +1,4 @@
-import { View, TextInput, Button, Text } from 'react-native';
+import { View, TextInput, Button } from 'react-native';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { gql, useMutation } from '@apollo/client';
