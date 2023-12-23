@@ -4,9 +4,10 @@ import { StatusBar } from 'react-native';
 import AuthNavigator from './src/navigation/AuthNavigator';
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 import { GluestackUIProvider } from '@gluestack-ui/themed';
+import ENV from './env';
 
 const client = new ApolloClient({
-  uri: 'http://localhost:3000/',
+  uri: ENV.API,
   cache: new InMemoryCache(),
 });
 
