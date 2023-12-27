@@ -1,10 +1,11 @@
 import { View, Text, Button, Linking } from 'react-native';
-import React, { useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { useMutation } from '@apollo/client';
 import { gql } from '@apollo/client';
 import { authorize } from 'react-native-app-auth';
-import { setContext } from '@apollo/client/link/context';
+import * as Keychain from 'react-native-keychain';
 import ENV from '../../../env';
+import { AuthContext } from '../../navigation/AuthNavigator';
 
 const config = {
   issuer: 'https://accounts.google.com',
@@ -28,19 +29,29 @@ const EXCHANGE_AUTHORIZATION_CODE = gql`
 `;
 
 const Authentication = () => {
-  const [exchangeAuthorizationCode] = useMutation(EXCHANGE_AUTHORIZATION_CODE);
+  const { setIsSignedIn, setToken } = useContext(AuthContext);
+  const [exchangeAuthorizationCode] = useMutation(EXCHANGE_AUTHORIZATION_CODE, {
+    onCompleted: data => {
+      Keychain.setGenericPassword(
+        data.exchangeToken.user.id,
+        data.exchangeToken.accessToken,
+      ).then(() => {
+        console.log('datasetIsSignedIn', data.exchangeToken.accessToken);
+        setToken(data.exchangeToken.accessToken);
+        setIsSignedIn(true);
+      });
+    },
+  });
   useEffect(() => {
-    const handleOpenURL = async event => {
+    const handleOpenURL = async (event: { url: string }) => {
       const code = event.url
         .split('code=')[1]
         .split('&')[0]
         .replace('%2F', '/');
       if (code) {
-        const { data } = await exchangeAuthorizationCode({
+        await exchangeAuthorizationCode({
           variables: { code },
         });
-
-        console.log('data', data);
       }
     };
     Linking.addEventListener('url', handleOpenURL);
