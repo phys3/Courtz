@@ -14,8 +14,8 @@ const GET_EVENTS = gql`
 
 const Home = () => {
   const { loading, error, data } = useQuery(GET_EVENTS);
-  const { setIsSignedIn, setToken } = useContext(AuthContext);
-
+  const { setIsSignedIn, setToken, setUserId } = useContext(AuthContext);
+  console.log('data', data, loading, error);
   if (loading) {
     return <Text>Loading...</Text>;
   }
@@ -33,6 +33,7 @@ const Home = () => {
         onPress={async () => {
           await Keychain.resetGenericPassword();
           setToken('');
+          setUserId('');
           setIsSignedIn(false);
         }}
       />

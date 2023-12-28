@@ -18,7 +18,7 @@ const ApolloProviderWithAuth = ({
 }: {
   children: React.ReactNode;
 }) => {
-  const { token } = useContext(AuthContext);
+  const { token, userId } = useContext(AuthContext);
 
   const authLink = setContext((_, { headers }) => {
     console.log('tokenauthLink', token);
@@ -26,6 +26,7 @@ const ApolloProviderWithAuth = ({
       headers: {
         ...headers,
         authorization: token ? `Bearer ${token}` : '',
+        'x-user-id': userId ? userId : '',
       },
     };
   });

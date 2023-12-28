@@ -29,7 +29,7 @@ const EXCHANGE_AUTHORIZATION_CODE = gql`
 `;
 
 const Authentication = () => {
-  const { setIsSignedIn, setToken } = useContext(AuthContext);
+  const { setIsSignedIn, setToken, setUserId } = useContext(AuthContext);
   const [exchangeAuthorizationCode] = useMutation(EXCHANGE_AUTHORIZATION_CODE, {
     onCompleted: data => {
       Keychain.setGenericPassword(
@@ -38,12 +38,14 @@ const Authentication = () => {
       ).then(() => {
         console.log('datasetIsSignedIn', data.exchangeToken.accessToken);
         setToken(data.exchangeToken.accessToken);
+        setUserId(data.exchangeToken.user.id);
         setIsSignedIn(true);
       });
     },
   });
   useEffect(() => {
     const handleOpenURL = async (event: { url: string }) => {
+      console.log('handleOpenURL', event.url);
       const code = event.url
         .split('code=')[1]
         .split('&')[0]
@@ -63,9 +65,10 @@ const Authentication = () => {
 
   const signIn = async () => {
     try {
-      await authorize(config);
+      const res = await authorize(config);
+      console.log('res', res);
     } catch (err) {
-      console.log(err);
+      console.log('EREERERERER', err);
     }
   };
 
