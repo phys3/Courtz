@@ -384,6 +384,11 @@ PODS:
   - react-native-app-auth (7.1.0):
     - AppAuth (~> 1.6)
     - React-Core
+  - react-native-maps (1.8.4):
+    - React-Core
+  - react-native-pager-view (6.2.3):
+    - RCT-Folly (= 2021.07.22.00)
+    - React-Core
   - react-native-safe-area-context (4.7.4):
     - React-Core
   - React-NativeModulesApple (0.72.6):
@@ -506,8 +511,6 @@ PODS:
     - React-Core
   - RNSVG (13.4.0):
     - React-Core
-  - RNVectorIcons (8.1.0):
-    - React-Core
   - SocketRocket (0.6.1)
   - Yoga (1.14.0)
   - YogaKit (1.18.1):
@@ -560,6 +563,8 @@ DEPENDENCIES:
   - React-jsinspector (from `../node_modules/react-native/ReactCommon/jsinspector`)
   - React-logger (from `../node_modules/react-native/ReactCommon/logger`)
   - react-native-app-auth (from `../node_modules/react-native-app-auth`)
+  - react-native-maps (from `../node_modules/react-native-maps`)
+  - react-native-pager-view (from `../node_modules/react-native-pager-view`)
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
   - React-NativeModulesApple (from `../node_modules/react-native/ReactCommon/react/nativemodule/core/platform/ios`)
   - React-perflogger (from `../node_modules/react-native/ReactCommon/reactperflogger`)
@@ -582,7 +587,6 @@ DEPENDENCIES:
   - RNKeychain (from `../node_modules/react-native-keychain`)
   - RNScreens (from `../node_modules/react-native-screens`)
   - RNSVG (from `../node_modules/react-native-svg`)
-  - RNVectorIcons (from `../node_modules/react-native-vector-icons`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
@@ -649,6 +653,10 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/logger"
   react-native-app-auth:
     :path: "../node_modules/react-native-app-auth"
+  react-native-maps:
+    :path: "../node_modules/react-native-maps"
+  react-native-pager-view:
+    :path: "../node_modules/react-native-pager-view"
   react-native-safe-area-context:
     :path: "../node_modules/react-native-safe-area-context"
   React-NativeModulesApple:
@@ -693,8 +701,6 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-screens"
   RNSVG:
     :path: "../node_modules/react-native-svg"
-  RNVectorIcons:
-    :path: "../node_modules/react-native-vector-icons"
   Yoga:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
@@ -734,6 +740,8 @@ SPEC CHECKSUMS:
   React-jsinspector: 194e32c6aab382d88713ad3dd0025c5f5c4ee072
   React-logger: cebf22b6cf43434e471dc561e5911b40ac01d289
   react-native-app-auth: 1da4b0ec30756ae1f4df8e96d2505b1ce5fbcc1f
+  react-native-maps: e2b78affd8e90c807a87bd042dc6b1af2decbcf1
+  react-native-pager-view: e26d35e382d86950c936f8917e3beb9188115ccc
   react-native-safe-area-context: 2cd91d532de12acdb0a9cbc8d43ac72a8e4c897c
   React-NativeModulesApple: 02e35e9a51e10c6422f04f5e4076a7c02243fff2
   React-perflogger: e3596db7e753f51766bceadc061936ef1472edc3
@@ -756,7 +764,6 @@ SPEC CHECKSUMS:
   RNKeychain: a65256b6ca6ba6976132cc4124b238a5b13b3d9c
   RNScreens: 3c2d122f5e08c192e254c510b212306da97d2581
   RNSVG: 07dbd870b0dcdecc99b3a202fa37c8ca163caec2
-  RNVectorIcons: 31cebfcf94e8cf8686eb5303ae0357da64d7a5a4
   SocketRocket: f32cd54efbe0f095c4d7594881e52619cfe80b17
   Yoga: b76f1acfda8212aa16b7e26bcce3983230c82603
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
