@@ -18,25 +18,35 @@ const TabLabel = styled(Text)<{ focused: boolean }>`
 
 interface TabIconProps {
   focused: boolean;
+  iconName: string;
 }
 
-const TabIcon: React.FC<TabIconProps> = ({ focused }) => (
+const TabIcon: React.FC<TabIconProps> = ({ focused, iconName }) => (
   <IonIcons
-    name="alarm"
+    name={iconName}
     size={25}
     color={focused ? colors.PRIMARY : colors.BLACK}
   />
 );
 
-const TabLabelText: React.FC<TabIconProps> = ({ focused }) => (
+interface TabLabelProps {
+  focused: boolean;
+  labelText: string;
+}
+
+const TabLabelText: React.FC<TabLabelProps> = ({ focused, labelText }) => (
   <TabLabel numberOfLines={1} adjustsFontSizeToFit focused={focused}>
-    {'Support'}
+    {labelText}
   </TabLabel>
 );
 
 const TabNavigator = () => {
-  const renderTabIcon = (props: any) => <TabIcon {...props} />;
-  const renderTabLabel = (props: any) => <TabLabelText {...props} />;
+  const renderTabIcon = (props: any, iconName: string) => (
+    <TabIcon {...props} iconName={iconName} />
+  );
+  const renderTabLabel = (props: any, labelText: string) => (
+    <TabLabelText {...props} labelText={labelText} />
+  );
 
   return (
     <Tab.Navigator>
@@ -44,12 +54,26 @@ const TabNavigator = () => {
         name="Home"
         component={Home}
         options={{
-          tabBarIcon: renderTabIcon,
-          tabBarLabel: renderTabLabel,
+          tabBarIcon: props => renderTabIcon(props, 'home-sharp'), // replace with actual icon name
+          tabBarLabel: props => renderTabLabel(props, 'Home'),
         }}
       />
-      <Tab.Screen name="Add Event" component={EventAdd} />
-      <Tab.Screen name="Profile" component={Profile} />
+      <Tab.Screen
+        name="Add Event"
+        component={EventAdd}
+        options={{
+          tabBarIcon: props => renderTabIcon(props, 'nuclear-sharp'), // replace with actual icon name
+          tabBarLabel: props => renderTabLabel(props, 'Add Event'),
+        }}
+      />
+      <Tab.Screen
+        name="Profile"
+        component={Profile}
+        options={{
+          tabBarIcon: props => renderTabIcon(props, 'notifications-outline'), // replace with actual icon name
+          tabBarLabel: props => renderTabLabel(props, 'Profile'),
+        }}
+      />
     </Tab.Navigator>
   );
 };
