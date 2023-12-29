@@ -57,7 +57,7 @@ const Authentication = () => {
       }
     };
     Linking.addEventListener('url', handleOpenURL);
-
+    console.log('addEventListner');
     return () => {
       Linking.removeAllListeners('url');
     };
@@ -65,6 +65,7 @@ const Authentication = () => {
 
   const signIn = async () => {
     try {
+      console.log('signIn');
       const res = await authorize(config);
       console.log('res', res);
     } catch (err) {
