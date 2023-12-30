@@ -1,4 +1,4 @@
-import { View, TextInput, Button } from 'react-native';
+import { View, TextInput, Button, Dimensions } from 'react-native';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { gql, useMutation } from '@apollo/client';
@@ -25,6 +25,29 @@ const CREATE_EVENT = gql`
   }
 `;
 
+let { width, height } = Dimensions.get('window');
+const ASPECT_RATIO = width / height;
+
+export const getCurrentLocation = async mapRef => {
+  try {
+    Geolocation.getCurrentPosition(
+      position => {
+        mapRef?.current?.animateToRegion({
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude,
+          latitudeDelta: 0.07,
+          longitudeDelta: 0.07 * ASPECT_RATIO,
+        });
+      },
+      error => {
+        console.log(error);
+      },
+      { enableHighAccuracy: false, timeout: 20000, maximumAge: 1000 },
+    );
+  } catch (e) {
+    console.log('animateToRegionError', e);
+  }
+};
 const EventAdd = () => {
   const { handleSubmit, setValue } = useForm();
   const [createEvent] = useMutation(CREATE_EVENT);
