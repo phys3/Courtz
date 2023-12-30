@@ -7,6 +7,7 @@ let { width, height } = Dimensions.get('window');
 const ASPECT_RATIO = width / height;
 export const latDelta = 12;
 export const lngDelta = latDelta * ASPECT_RATIO;
+
 export const getCurrentLocation = async (
   mapRef: React.MutableRefObject<MapView | null>,
 ) => {

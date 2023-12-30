@@ -61,7 +61,7 @@ const Authentication = () => {
     return () => {
       Linking.removeAllListeners('url');
     };
-  }, []);
+  }, [exchangeAuthorizationCode]);
 
   const signIn = async () => {
     try {

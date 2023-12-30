@@ -1,4 +1,4 @@
-import { View, Text, Button } from 'react-native';
+import { SafeAreaView, Text, Button } from 'react-native';
 import React, { useContext } from 'react';
 import { useQuery, gql } from '@apollo/client';
 import { AuthContext } from '../../navigation/AuthNavigator';
@@ -24,7 +24,7 @@ const Home = () => {
   }
 
   return (
-    <View>
+    <SafeAreaView>
       {data.events.map(({ id }: { id: string }) => (
         <Text key={id}>{id}</Text>
       ))}
@@ -37,7 +37,7 @@ const Home = () => {
           setIsSignedIn(false);
         }}
       />
-    </View>
+    </SafeAreaView>
   );
 };
 
