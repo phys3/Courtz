@@ -1,8 +1,9 @@
 import { SafeAreaView, Dimensions } from 'react-native';
-import React from 'react';
-import { TabView, SceneMap } from 'react-native-tab-view';
+import React, { useState } from 'react';
+import { TabView } from 'react-native-tab-view';
 import EventLocation from './components/EventLocation';
 import EventInfo from './components/EventInfo';
+import { SubmitHandler, useForm, FieldValues } from 'react-hook-form';
 // import { gql, useMutation } from '@apollo/client';
 
 const initialLayout = {
@@ -30,17 +31,48 @@ const initialLayout = {
 //     }
 //   }
 // `;
+
 const EventAdd = () => {
-  const [index, setIndex] = React.useState(0);
-  const [routes] = React.useState([
+  const [index, setIndex] = useState(0);
+  const [routes] = useState([
     { key: 'eventLocation', title: 'Event Location' },
     { key: 'eventInfo', title: 'Event Info' },
   ]);
 
-  const renderScene = SceneMap({
-    eventLocation: EventLocation,
-    eventInfo: EventInfo,
-  });
+  const {
+    setValue,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+  // const [createEvent] = useMutation(CREATE_EVENT);
+
+  const onSubmit: SubmitHandler<FieldValues> = data => {
+    console.log(data);
+    // createEvent({
+    //   variables: {
+    //     event_type: parseInt(data.event_type, 10),
+    //     age_group: data.age_group,
+    //     skill_level: parseInt(data.skill_level, 10),
+    //     event_location: {
+    //       latitude: parseFloat(data.latitude),
+    //       longitude: parseFloat(data.longitude),
+    //     },
+    //     date_time: data.date_time,
+    //     host_user_uid: data.host_user_uid,
+    //   },
+    // });
+  };
+
+  const renderScene = ({ route }: { route: { key: string } }) => {
+    switch (route.key) {
+      case 'eventLocation':
+        return <EventLocation setValue={setValue} />;
+      case 'eventInfo':
+        return <EventInfo onSubmit={handleSubmit(onSubmit)} errors={errors} />;
+      default:
+        return null;
+    }
+  };
 
   return (
     <SafeAreaView style={{ flex: 1 }}>

@@ -2,6 +2,8 @@ import { View, Dimensions } from 'react-native';
 import React, { useRef, useEffect } from 'react';
 import MapView, { PROVIDER_DEFAULT } from 'react-native-maps';
 import Geolocation from 'react-native-geolocation-service';
+import { UseFormSetValue, FieldValues } from 'react-hook-form';
+// import { FieldValues } from '..';
 
 let { width, height } = Dimensions.get('window');
 const ASPECT_RATIO = width / height;
@@ -31,7 +33,9 @@ export const getCurrentLocation = async (
   }
 };
 
-const EventLocation = () => {
+const EventLocation: React.FC<{
+  setValue: UseFormSetValue<FieldValues>;
+}> = () => {
   const mapRef = useRef(null);
   useEffect(() => {
     getCurrentLocation(mapRef);
