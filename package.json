@@ -13,6 +13,7 @@
     "@apollo/client": "^3.8.8",
     "@gluestack-style/react": "^1.0.29",
     "@gluestack-ui/themed": "^1.0.30",
+    "@hookform/resolvers": "^3.3.3",
     "@hookstate/core": "^4.0.1",
     "@react-navigation/bottom-tabs": "^6.5.11",
     "@react-navigation/native": "^6.1.9",
@@ -34,7 +35,8 @@
     "react-native-svg": "^13.4.0",
     "react-native-tab-view": "^3.5.2",
     "react-native-vector-icons": "^10.0.3",
-    "styled-components": "^5.3.11"
+    "styled-components": "^5.3.11",
+    "zod": "^3.22.4"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
