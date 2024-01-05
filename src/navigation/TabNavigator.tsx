@@ -1,14 +1,24 @@
 import React from 'react';
 import { Text } from 'react-native';
+import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Home from '../screens/Home';
 import EventAdd from '../screens/EventAdd';
 import Profile from '../screens/Profile';
+import EventFind from '../screens/EventFind';
 import IonIcons from 'react-native-vector-icons/Ionicons';
 import { colors } from '../utilities/theme';
 import styled from 'styled-components/native';
 
 const Tab = createBottomTabNavigator();
+const HomeStack = createStackNavigator();
+
+const HomeStackNavigator = () => (
+  <HomeStack.Navigator initialRouteName="Home">
+    <HomeStack.Screen name="Home" component={Home} />
+    <HomeStack.Screen name="EventFind" component={EventFind} />
+  </HomeStack.Navigator>
+);
 
 const TabLabel = styled(Text)<{ focused: boolean }>`
   color: ${props => (props.focused ? colors.PRIMARY : colors.BLACK)};
@@ -52,9 +62,9 @@ const TabNavigator = () => {
     <Tab.Navigator>
       <Tab.Screen
         name="Home"
-        component={Home}
+        component={HomeStackNavigator}
         options={{
-          tabBarIcon: props => renderTabIcon(props, 'home-sharp'), // replace with actual icon name
+          tabBarIcon: props => renderTabIcon(props, 'home-sharp'),
           tabBarLabel: props => renderTabLabel(props, 'Home'),
         }}
       />
@@ -62,7 +72,7 @@ const TabNavigator = () => {
         name="Add Event"
         component={EventAdd}
         options={{
-          tabBarIcon: props => renderTabIcon(props, 'nuclear-sharp'), // replace with actual icon name
+          tabBarIcon: props => renderTabIcon(props, 'nuclear-sharp'),
           tabBarLabel: props => renderTabLabel(props, 'Add Event'),
         }}
       />
@@ -70,7 +80,7 @@ const TabNavigator = () => {
         name="Profile"
         component={Profile}
         options={{
-          tabBarIcon: props => renderTabIcon(props, 'notifications-outline'), // replace with actual icon name
+          tabBarIcon: props => renderTabIcon(props, 'notifications-outline'),
           tabBarLabel: props => renderTabLabel(props, 'Profile'),
         }}
       />

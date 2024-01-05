@@ -2,7 +2,7 @@ import { View, Dimensions } from 'react-native';
 import React, { useRef, useEffect } from 'react';
 import MapView, { PROVIDER_DEFAULT, Marker } from 'react-native-maps';
 import Geolocation from 'react-native-geolocation-service';
-import { UseFormSetValue, FieldValues, UseFormWatch } from 'react-hook-form';
+import { UseFormSetValue, UseFormWatch } from 'react-hook-form';
 import Icon from 'react-native-vector-icons/Ionicons';
 import SmallButton from '../../../components/SmallButton';
 import { FormData } from '..';
