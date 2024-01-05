@@ -15,7 +15,13 @@ const HomeStack = createStackNavigator();
 
 const HomeStackNavigator = () => (
   <HomeStack.Navigator initialRouteName="Home">
-    <HomeStack.Screen name="Home" component={Home} />
+    <HomeStack.Screen
+      name="Home"
+      component={Home}
+      options={{
+        headerShown: false,
+      }}
+    />
     <HomeStack.Screen name="EventFind" component={EventFind} />
   </HomeStack.Navigator>
 );
@@ -61,9 +67,10 @@ const TabNavigator = () => {
   return (
     <Tab.Navigator>
       <Tab.Screen
-        name="Home"
+        name="HomeStack"
         component={HomeStackNavigator}
         options={{
+          headerShown: false,
           tabBarIcon: props => renderTabIcon(props, 'home-sharp'),
           tabBarLabel: props => renderTabLabel(props, 'Home'),
         }}
