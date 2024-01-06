@@ -57,6 +57,7 @@ const Row = styled(View)<{ mr?: boolean; error?: string }>`
 `;
 
 interface InputProps {
+  value: string | undefined;
   setValue: (value: string) => void;
   error?: string;
   label?: string;
@@ -69,6 +70,7 @@ interface InputProps {
 }
 
 const Input: React.FC<InputProps> = ({
+  value,
   setValue,
   error,
   label,
@@ -86,6 +88,7 @@ const Input: React.FC<InputProps> = ({
       {label && <Label disabled={disabled}>{label}</Label>}
       <Row error={error}>
         <StyledInput
+          value={value}
           autoCorrect={false}
           onChangeText={setValue}
           error={error}

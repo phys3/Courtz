@@ -7,6 +7,7 @@ import { SubmitHandler, useForm, FieldValues } from 'react-hook-form';
 import { gql, useMutation } from '@apollo/client';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { NavigationProp } from '@react-navigation/native';
 
 const initialLayout = {
   width: Dimensions.get('window').width,
@@ -44,16 +45,16 @@ const CREATE_EVENT = gql`
 `;
 
 const schema = z.object({
-  event_type: z.number(),
+  event_type: z.string(),
   age_group: z.string().optional(),
-  skill_level: z.number(),
+  skill_level: z.string(),
   latitude: z.number(),
   longitude: z.number(),
 });
 
 export type FormData = z.infer<typeof schema>;
 
-const EventAdd = () => {
+const EventAdd = ({ navigation }: { navigation: NavigationProp<any> }) => {
   const [index, setIndex] = useState(0);
   const [routes] = useState([
     { key: 'eventLocation', title: 'Event Location' },
@@ -64,6 +65,7 @@ const EventAdd = () => {
     watch,
     setValue,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<FormData>({
     resolver: zodResolver(schema),
@@ -71,6 +73,13 @@ const EventAdd = () => {
   const [createEvent] = useMutation(CREATE_EVENT, {
     onCompleted: data => {
       console.log(data);
+      reset({
+        event_type: '',
+        age_group: '',
+        skill_level: '',
+      });
+      setIndex(0);
+      navigation.navigate('HomeStack');
     },
     onError: error => {
       console.log(error);
@@ -124,6 +133,7 @@ const EventAdd = () => {
       case 'eventInfo':
         return (
           <EventInfo
+            watch={watch}
             setValue={setValue}
             onSubmit={handleSubmit(onSubmit)}
             errors={errors}
