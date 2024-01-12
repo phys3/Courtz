@@ -1,6 +1,6 @@
 Learning Project: OAuth and Apollo
 
-This is a learning project focused on understanding OAuth and Apollo Client.
+This is a learning project focused on understanding OAuth, Apollo Client, and Zustand.
 
 ## Technologies Used
 
@@ -9,6 +9,7 @@ This is a learning project focused on understanding OAuth and Apollo Client.
 - Apollo Client for GraphQL
 - OAuth Google
 - RN Maps
+- Zustand
 - styled-components
 
 ## Project Structure
